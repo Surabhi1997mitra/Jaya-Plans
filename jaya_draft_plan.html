@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#1a1a1a">
+<title>Jaya — Diet & Lifestyle Plan</title>
+<style>
+:root {
+  --serif: Georgia, 'Times New Roman', serif;
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --ink: #1a1a1a; --ink-mid: #444; --ink-soft: #888;
+  --paper: #faf8f4; --warm: #f2ede4;
+  --accent: #c0392b; --accent-soft: #fdf0ee;
+  --teal: #1a6b5a; --teal-soft: #e6f4f1;
+  --amber-soft: #fdf4e3; --amber: #c17f24;
+  --border: #e2dcd3;
+  --info: #1d56c4; --info-soft: #eef3fd;
+  --nav: 60px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;background:var(--paper)}
+body{font-family:var(--sans);color:var(--ink);font-size:15px;line-height:1.7;padding-bottom:calc(var(--nav) + 12px)}
+
+/* BOTTOM NAV */
+.bnav{position:fixed;bottom:0;left:0;right:0;height:var(--nav);background:#111;display:flex;z-index:999;border-top:1px solid rgba(255,255,255,0.07);box-shadow:0 -4px 20px rgba(0,0,0,0.3)}
+.bnav a{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;text-decoration:none;color:rgba(255,255,255,0.38);font-size:9px;letter-spacing:0.06em;text-transform:uppercase;font-family:var(--sans);transition:color 0.15s;padding-bottom:env(safe-area-inset-bottom,0px)}
+.bnav-icon{font-size:18px;line-height:1}
+
+/* DRAFT BANNER */
+.draft-banner{background:#2c2416;color:#fff;padding:10px 16px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;text-align:center;font-weight:500}
+
+/* COVER */
+#cover{background:var(--ink);color:#fff;padding:48px 20px 44px;position:relative;overflow:hidden}
+#cover::before{content:'';position:absolute;top:-60px;right:-60px;width:260px;height:260px;border-radius:50%;border:1px solid rgba(255,255,255,0.05);pointer-events:none}
+#cover::after{content:'';position:absolute;bottom:-40px;left:20%;width:180px;height:180px;border-radius:50%;border:1px solid rgba(255,255,255,0.03);pointer-events:none}
+.cover-eyebrow{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:16px}
+.cover-name{font-family:var(--serif);font-size:48px;line-height:1.0;margin-bottom:12px;font-weight:400}
+.cover-sub{font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;margin-bottom:24px;max-width:300px}
+.cover-pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px}
+.cpill{font-size:10px;padding:3px 10px;border-radius:18px;border:1px solid rgba(255,255,255,0.14);color:rgba(255,255,255,0.55)}
+.cover-coach{font-family:var(--serif);font-size:16px;font-style:italic;color:rgba(255,255,255,0.5)}
+.cover-role{font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.22);margin-top:2px}
+
+/* SECTION STRUCTURE */
+.sec-anchor{display:block}
+.ph{padding:26px 18px 14px;border-bottom:1px solid var(--border);background:var(--paper)}
+.ph-eye{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.ph-title{font-family:var(--serif);font-size:26px;font-weight:400;line-height:1.15;color:var(--ink)}
+.cx{padding:16px 14px}
+
+/* CARDS */
+.card{background:#fff;border:1px solid var(--border);border-radius:13px;overflow:hidden;margin-bottom:11px}
+.card.hi{border-color:var(--accent);border-width:2px}
+.card.hi-teal{border-color:var(--teal);border-width:2px}
+.ch{padding:12px 14px;background:var(--warm);border-bottom:1px solid var(--border)}
+.ch.acc{background:var(--accent-soft)}
+.ch.teal{background:var(--teal-soft)}
+.ch.info{background:var(--info-soft)}
+.ch.amber{background:var(--amber-soft)}
+.ch.dark{background:#1a1a1a}
+.ct{font-weight:500;font-size:13px;line-height:1.4}
+.ch.acc .ct{color:var(--accent)}
+.ch.teal .ct{color:var(--teal)}
+.ch.info .ct{color:var(--info)}
+.ch.amber .ct{color:var(--amber)}
+.ch.dark .ct{color:#fff}
+.cm{font-size:10px;color:var(--ink-soft);margin-top:2px}
+.ch.dark .cm{color:rgba(255,255,255,0.4)}
+.cb{padding:12px 14px;font-size:12.5px;color:var(--ink-mid);line-height:1.7}
+
+/* ALERTS */
+.al{border-radius:9px;padding:11px 13px;margin-bottom:10px;font-size:12.5px;line-height:1.6}
+.al.d{background:var(--accent-soft);border-left:3px solid var(--accent);color:#7a1a14}
+.al.w{background:var(--amber-soft);border-left:3px solid var(--amber);color:#5a3a0a}
+.al.ok{background:var(--teal-soft);border-left:3px solid var(--teal);color:#0d3d30}
+.al.i{background:var(--info-soft);border-left:3px solid var(--info);color:#1a3a8a}
+.al b,.al strong{font-weight:600}
+
+/* NOTES */
+.nt{border-radius:7px;padding:8px 10px;margin-top:9px;font-size:11.5px;line-height:1.6}
+.nt.d{background:var(--accent-soft);color:#7a1a14}
+.nt.w{background:var(--amber-soft);color:#5a3a0a}
+.nt.ok{background:var(--teal-soft);color:#0d3d30}
+.nt.i{background:var(--info-soft);color:#1a3a8a}
+
+/* BADGES */
+.bx{display:inline-block;font-size:8.5px;font-weight:600;padding:1px 6px;border-radius:18px;margin-left:3px;vertical-align:middle}
+.bx.d{background:var(--accent);color:#fff}
+.bx.ok{background:var(--teal);color:#fff}
+.bx.i{background:var(--info);color:#fff}
+.bx.w{background:var(--amber);color:#fff}
+
+/* STATS GRID */
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:12px}
+.st{background:var(--paper);padding:12px 10px}
+.stl{font-size:9px;color:var(--ink-soft);letter-spacing:0.03em;margin-bottom:2px}
+.stv{font-family:var(--serif);font-size:19px;color:var(--ink);line-height:1}
+.stu{font-size:9px;color:var(--ink-soft);margin-top:1px}
+.st.acc{background:var(--accent-soft)}.st.acc .stv{color:var(--accent)}
+.st.tl{background:var(--teal-soft)}.st.tl .stv{color:var(--teal)}
+
+/* TABLE ROWS */
+.tr{border-bottom:1px solid var(--border);padding:11px 13px}
+.tr:last-child{border-bottom:none}
+.trm{font-size:9px;font-weight:600;color:var(--ink-soft);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:2px}
+.trv{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.trd{font-size:11.5px;color:var(--ink-mid);line-height:1.5}
+
+/* MACRO BAR */
+.macro-bar{margin:12px 0 5px}
+.macro-bar-label{display:flex;justify-content:space-between;font-size:10px;color:var(--ink-soft);margin-bottom:4px}
+.macro-bar-track{height:5px;background:var(--border);border-radius:9px;overflow:hidden;display:flex;gap:1px}
+.mb-p{background:#1a6b5a;height:100%;border-radius:9px}
+.mb-c{background:#1d56c4;height:100%;border-radius:9px}
+.mb-f{background:#c17f24;height:100%;border-radius:9px}
+.macro-legend{display:flex;gap:10px;margin-top:5px;flex-wrap:wrap}
+.ml-item{display:flex;align-items:center;gap:4px;font-size:9px;color:var(--ink-soft)}
+.ml-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+
+/* DAY TOGGLE */
+.day-toggle-wrap{display:flex;gap:0;border:1px solid var(--border);border-radius:9px;overflow:hidden;margin-bottom:12px}
+.day-toggle-btn{flex:1;padding:9px;text-align:center;font-size:11px;font-weight:500;cursor:pointer;background:var(--paper);color:var(--ink-soft);border:none;font-family:var(--sans);transition:all 0.2s}
+.day-toggle-btn.active{background:var(--ink);color:#fff}
+.diet-variant{display:none}
+.diet-variant.active{display:block}
+
+/* DIVIDER */
+.div{height:1px;background:var(--border);margin:18px 0}
+.slbl{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.stit{font-family:var(--serif);font-size:20px;font-weight:400;line-height:1.2;margin-bottom:11px}
+
+/* FOOTER */
+.foot{background:var(--ink);color:rgba(255,255,255,0.38);padding:22px 16px;font-size:11px;line-height:1.6;margin-top:5px}
+.footn{font-family:var(--serif);font-size:18px;font-style:italic;color:rgba(255,255,255,0.6);margin-bottom:5px}
+
+@media (max-width: 500px) {
+  .page { padding: 16px 12px 50px; }
+}
+</style>
+</head>
+<body>
+
+<div class="draft-banner">📋 DRAFT VERSION — Overview & Diet</div>
+
+<!-- COVER -->
+<div id="cover">
+  <div class="cover-eyebrow">Fat Loss · Insulin Resistance Management</div>
+  <div class="cover-name">Jaya<br>Tahiliani</div>
+  <div class="cover-sub">Home-based nutrition plan. Vegetarian meals. Paneer-focused protein. Sustainable for a desk job lifestyle.</div>
+  <div class="cover-pills">
+    <span class="cpill">45 yrs · 5'2"</span>
+    <span class="cpill">83 kg</span>
+    <span class="cpill">1,400 kcal</span>
+    <span class="cpill">80g Protein</span>
+    <span class="cpill">Insulin Resistant</span>
+    <span class="cpill">3× Home Workouts</span>
+  </div>
+  <div class="cover-coach">Your Coach</div>
+  <div class="cover-role">Fat Loss · Recomposition · Sustainable Nutrition</div>
+</div>
+
+<!-- ═══════════════════ OVERVIEW ═══════════════════ -->
+<div id="overview" class="sec-anchor"></div>
+<div class="ph">
+  <div class="ph-eye">Overview</div>
+  <div class="ph-title">Your numbers<br>and priorities.</div>
+</div>
+<div class="cx">
+
+  <div class="al i"><strong>⚠️ Starting Point:</strong> 83 kg, sedentary lifestyle (<2,000 steps), insulin resistance + hormonal imbalance. No recent blood work. This plan prioritises sustained fat loss, blood sugar stability, and habit building over 6 months.</div>
+
+  <div class="div"></div>
+
+  <div class="slbl">Your targets</div>
+  <div class="stit">Macros, calories,<br>and why they matter.</div>
+
+  <div class="card">
+    <div class="ch teal"><div class="ct">Nutrition targets</div></div>
+    <div>
+      <div class="tr"><div class="trm">Daily calories</div><div class="trv">1,400 kcal</div><div class="trd">Conservative deficit for your body type and activity level. Sustainable without extreme hunger. At 45, metabolism is slower — we're not pushing aggressively.</div></div>
+      <div class="tr"><div class="trm">Protein</div><div class="trv">80g daily</div><div class="trd">Moderate protein from whole foods (dal, rajma, paneer 1× per day) + Beast Life yeast protein shake post-workout. Keeps you satisfied without overdoing it.</div></div>
+      <div class="tr"><div class="trm">Carbs</div><div class="trv">170g daily</div><div class="trd">Moderate-to-higher carbs, all low-GI sources (roti, dal, legumes, rajma). With insulin resistance, focus is on timing and quality, not restriction.</div></div>
+      <div class="tr"><div class="trm">Fat</div><div class="trv">40g daily</div><div class="trd">Moderate fat for satiety and hormone balance. Sources: cooking oil (minimal), occasional paneer, dal. Realistic for vegetarian eating.</div></div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="st tl"><div class="stl">Protein</div><div class="stv">80g</div><div class="stu">whole foods + shake</div></div>
+    <div class="st"><div class="stl">Carbs</div><div class="stv">170g</div><div class="stu">low-GI</div></div>
+  </div>
+  <div class="stats">
+    <div class="st acc"><div class="stl">Calories</div><div class="stv">1,400</div><div class="stu">daily avg</div></div>
+    <div class="st"><div class="stl">Fat</div><div class="stv">40g</div><div class="stu">moderate</div></div>
+  </div>
+
+  <div class="macro-bar">
+    <div class="macro-bar-label"><span>Macro split — 1,400 kcal</span><span>320 + 680 + 360 kcal</span></div>
+    <div class="macro-bar-track">
+      <div class="mb-p" style="width:23%"></div>
+      <div class="mb-c" style="width:48%"></div>
+      <div class="mb-f" style="width:26%"></div>
+    </div>
+    <div class="macro-legend">
+      <div class="ml-item"><div class="ml-dot" style="background:#1a6b5a"></div>Protein 80g · 23%</div>
+      <div class="ml-item"><div class="ml-dot" style="background:#1d56c4"></div>Carbs 170g · 48%</div>
+      <div class="ml-item"><div class="ml-dot" style="background:#c17f24"></div>Fat 40g · 26%</div>
+    </div>
+  </div>
+
+  <div class="div"></div>
+
+  <div class="slbl">Insulin resistance protocol</div>
+  <div class="stit">3 changes that matter<br>starting now.</div>
+
+  <div class="card hi">
+    <div class="ch acc"><div class="ct">1 — Low-GI carbs only</div></div>
+    <div class="cb">Roti (wheat, bajra, jowar), dal (all types), rajma, chickpeas. No white rice at dinner. No bread at dinner. Carbs are front-loaded to breakfast and lunch when insulin sensitivity is higher.
+      <div class="nt ok">This isn't about avoiding carbs — it's about choosing carbs your body handles better. Roti + dal is your foundation.</div>
+    </div>
+  </div>
+  <div class="card hi">
+    <div class="ch acc"><div class="ct">2 — Paneer once per day (choose one meal)</div></div>
+    <div class="cb">Pick one meal — breakfast, lunch, or dinner — to include paneer (80–100g). Rest of protein comes from dal, rajma, chickpeas, and Beast Life shake post-workout. This keeps the plan simpler and your budget sustainable.
+    </div>
+  </div>
+  <div class="card hi">
+    <div class="ch acc"><div class="ct">3 — Daily steps: 5,000 minimum</div></div>
+    <div class="cb">You're currently at <2,000. Movement after meals is non-negotiable — even 10 minutes of slow walking after lunch and dinner directly reduces blood sugar spikes. Build to 5,000 steps over 2–3 weeks.
+      <div class="nt d">This is not about exercise — it's about managing insulin resistance. Walk after eating. Every day.</div>
+    </div>
+  </div>
+
+  <div class="div"></div>
+
+  <div class="slbl">Water & hydration</div>
+  <div class="card">
+    <div class="ch"><div class="ct">Current: 1–2L per day → Target: 3L per day</div></div>
+    <div class="cb">Dehydration worsens insulin resistance and makes fat loss harder. By week 2, aim for 2.5–3L. Keep a bottle on your desk — most of this comes from sipping during work hours, not huge gulps.</div>
+  </div>
+
+  <div class="div"></div>
+
+  <div class="slbl">Timeline & expectations</div>
+  <div class="card">
+    <div class="ch teal"><div class="ct">6-month fat loss phase</div></div>
+    <div class="cb">
+      <strong>Month 1–2:</strong> Build habits. Paneer every meal, 3,000+ steps, 2.5L water. Weight may drop 2–3 kg as water weight leaves. Energy will improve noticeably by week 3.<br><br>
+      <strong>Month 3–4:</strong> Consistent fat loss phase. Add 1–2 kg of muscle from home workouts. Insulin sensitivity improving. Continue building steps to 5,000–7,000.<br><br>
+      <strong>Month 5–6:</strong> Refinement. If progress slows, we adjust macros slightly. By end of 6 months, new habits are automatic and you feel like a different version of yourself.
+    </div>
+  </div>
+
+  <div class="al w"><strong>⚠️ Important:</strong> At 45 with insulin resistance and no recent blood work, a fasting glucose + insulin test would help us dial in nutrition even more precisely. If you can get this done in the next month, share it with me — I'll adjust your plan if needed.</div>
+
+</div>
+
+<!-- ═══════════════════ DIET ═══════════════════ -->
+<div id="diet" class="sec-anchor"></div>
+<div class="ph">
+  <div class="ph-eye">Nutrition</div>
+  <div class="ph-title">Your daily meal plan.<br>Home-cooked vegetarian.</div>
+</div>
+<div class="cx">
+
+  <div class="day-toggle-wrap">
+    <button class="day-toggle-btn active" onclick="showDiet('train', this)">🏋️ Workout Day</button>
+    <button class="day-toggle-btn" onclick="showDiet('rest', this)">🛌 Rest Day</button>
+  </div>
+
+  <!-- ── WORKOUT DAY ── -->
+  <div class="diet-variant active" id="diet-train">
+    <div class="al i"><strong>Workout day total: 1,400 kcal · P ~85-90g · C 170g · F 40g.</strong> Breakfast is the anchor with paneer. Lunch and dinner are balanced roti + dal + sabzi. Add curd anytime and Beast Life protein whenever works for you.</div>
+
+    <!-- BREAKFAST -->
+    <div class="card">
+      <div class="ch acc"><div class="ct">Breakfast — HEAVIEST MEAL <span class="bx d">Paneer here</span></div><div class="cm">~380 kcal · 8:00–9:00am · Protein anchor for the day</div></div>
+      <div class="cb">
+        <strong>Choose one base:</strong><br><br>
+        <strong>Option A — Poha + Paneer Bhurji:</strong><br>
+        · 1.5 cups poha (flattened rice)<br>
+        · Paneer bhurji (100g paneer, cooked with onion, tomato, minimal oil)<br><br>
+        <strong>Option B — Upma + Paneer Bhurji:</strong><br>
+        · 1 cup upma (semolina, veggies)<br>
+        · Paneer bhurji (100g paneer)<br><br>
+        <strong>Option C — Roti + Sabzi + Paneer Cubes:</strong><br>
+        · 2–3 rotis<br>
+        · 1 cup sabzi (any vegetable curry)<br>
+        · 100g paneer cubes (fried / seasoned)<br><br>
+        <strong>Drink:</strong> Black tea or black coffee (no sugar)<br><br>
+        <div class="nt ok">Paneer at breakfast every single day — this is your protein anchor. Everything else pivots around this meal.</div>
+      </div>
+    </div>
+
+    <!-- LUNCH -->
+    <div class="card">
+      <div class="ch"><div class="ct">Lunch</div><div class="cm">~380 kcal · 12:30–1:30pm</div></div>
+      <div class="cb">
+        <strong>Choose one grain:</strong><br>
+        · 2 rotis (wheat / bajra / jowar)<br>
+        · OR 150g cooked rice (max 2–3× per week)<br><br>
+        <strong>Always include:</strong><br>
+        · 1 cup dal (liquidy) — masoor, chana, moong, rajma (rotate daily)<br>
+        · 1 cup sabzi (any vegetable curry — aloo, bhari sabzi, baingan, leafy greens)<br>
+        · Optional: tofu/soya sabzi if you want extra protein variety (but paneer is at breakfast, so optional)<br><br>
+        <div class="nt ok">🚶 <strong>After lunch:</strong> 10–15 min slow walk. Blood sugar management — non-negotiable.</div>
+      </div>
+    </div>
+
+    <!-- DINNER -->
+    <div class="card hi">
+      <div class="ch acc"><div class="ct">Dinner</div><div class="cm">~350 kcal · 7:00–8:00pm</div></div>
+      <div class="cb">
+        <strong>Choose one grain:</strong><br>
+        · 2 rotis (wheat / bajra / jowar)<br>
+        · OR 150g cooked rice<br><br>
+        <strong>Always include:</strong><br>
+        · 1 cup dal (liquidy) — masoor, chana, moong, rajma<br>
+        · 1 cup sabzi (light preferred — leafy greens, palak, methi)<br>
+        · Paneer sabzi (100g paneer) — ONLY if you didn't have paneer at breakfast<br><br>
+        <div class="nt ok">🚶 <strong>After dinner:</strong> 10–15 min walk. Non-negotiable every day.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── REST DAY ── -->
+  <div class="diet-variant" id="diet-rest">
+    <div class="al i"><strong>Rest day total: 1,400 kcal · P ~85-90g · C 160g · F 40g.</strong> Same meal structure as workout days — paneer at breakfast, then lunch and dinner with roti + dal + sabzi. Add curd anytime and yeast protein whenever works.</div>
+
+    <!-- BREAKFAST -->
+    <div class="card">
+      <div class="ch acc"><div class="ct">Breakfast — HEAVIEST MEAL <span class="bx d">Paneer here</span></div><div class="cm">~380 kcal · 8:00–9:00am · Protein anchor for the day</div></div>
+      <div class="cb">
+        <strong>Choose one base:</strong><br><br>
+        <strong>Option A — Poha + Paneer Bhurji:</strong><br>
+        · 1.5 cups poha (flattened rice)<br>
+        · Paneer bhurji (100g paneer, cooked with onion, tomato, minimal oil)<br><br>
+        <strong>Option B — Upma + Paneer Bhurji:</strong><br>
+        · 1 cup upma (semolina, veggies)<br>
+        · Paneer bhurji (100g paneer)<br><br>
+        <strong>Option C — Roti + Sabzi + Paneer Cubes:</strong><br>
+        · 2–3 rotis<br>
+        · 1 cup sabzi (any vegetable curry)<br>
+        · 100g paneer cubes (fried / seasoned)<br><br>
+        <strong>Drink:</strong> Black tea or black coffee (no sugar)<br><br>
+        <div class="nt ok">Paneer at breakfast every single day — same every day, workout or rest.</div>
+      </div>
+    </div>
+
+    <!-- LUNCH -->
+    <div class="card">
+      <div class="ch"><div class="ct">Lunch</div><div class="cm">~380 kcal · 12:30–1:30pm</div></div>
+      <div class="cb">
+        <strong>Choose one grain:</strong><br>
+        · 2 rotis (wheat / bajra / jowar)<br>
+        · OR 150g cooked rice (max 2–3× per week)<br><br>
+        <strong>Always include:</strong><br>
+        · 1 cup dal (liquidy) — masoor, chana, moong, rajma (rotate daily)<br>
+        · 1 cup sabzi (any vegetable curry — aloo, bhari sabzi, baingan, leafy greens)<br>
+        · Optional: tofu/soya sabzi for variety (paneer is at breakfast)<br><br>
+        <div class="nt ok">🚶 <strong>After lunch:</strong> 10–15 min slow walk. Same protocol every day.</div>
+      </div>
+    </div>
+
+    <!-- DINNER -->
+    <div class="card hi">
+      <div class="ch acc"><div class="ct">Dinner</div><div class="cm">~350 kcal · 7:00–8:00pm</div></div>
+      <div class="cb">
+        <strong>Choose one grain:</strong><br>
+        · 2 rotis (wheat / bajra / jowar)<br>
+        · OR 150g cooked rice<br><br>
+        <strong>Always include:</strong><br>
+        · 1 cup dal (liquidy) — masoor, chana, moong, rajma<br>
+        · 1 cup sabzi (light preferred — leafy greens, palak, methi)<br><br>
+        <div class="nt ok">🚶 <strong>After dinner:</strong> 10–15 min walk. Mandatory every day.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="div"></div>
+
+  <div class="slbl">Daily additions — every day</div>
+  <div class="stit">Curd & protein shake.<br>No timing, just add them.</div>
+
+  <div class="card">
+    <div class="ch teal"><div class="ct">1 Cup Curd — Anytime</div></div>
+    <div class="cb">Low-fat curd (unsweetened, 1 cup) — add this every single day. Have it as a snack, after lunch, or after dinner. Timing doesn't matter. ~11g protein, helps with digestion.</div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ct">1 Scoop Beast Life Yeast Protein — Whenever Works</div></div>
+    <div class="cb">
+      · Mix 1 scoop with water or low-fat milk<br>
+      · Have it whenever you want — after a meal, as a snack, with your breakfast, before bed<br>
+      · No fixed timing. Just consume 1 scoop daily<br>
+      · Adds ~26g protein to hit your daily target<br>
+      <div class="nt ok">This is flexible. Morning, afternoon, evening — whenever fits your day. Just don't miss it.</div>
+    </div>
+  </div>
+
+  <div class="al i"><strong>Protein summary:</strong> Paneer at breakfast (24g) + meals throughout day (10-13g + 10-13g) + curd daily (11g) + Beast Life (26g) = ~85-90g protein daily. This hits your target naturally without forcing timing.</div>
+
+  <div class="div"></div>
+
+  <div class="slbl">What to avoid completely</div>
+  <div class="card">
+    <div class="ch"><div class="ct" style="color:var(--accent)">❌ Cut these out</div></div>
+    <div class="cb">White rice · Maida / white bread · Sugary biscuits · Chaat & street food · Soft drinks · Fruit juices · Sugary tea / chai · Sweets & mithai · Fried snacks · Restaurant gravies</div>
+  </div>
+
+  <div class="al w"><strong>About your current snacking:</strong> You mentioned biscuits and chaat 2–3× per week. This needs to stop immediately — these are high-calorie, high-GI triggers for insulin resistance. I know it's hard to let go, but the next 6 weeks are critical for habit change. By week 8, you won't crave them the same way.</div>
+
+  <div class="al w"><strong>Cooking oil rule:</strong> Maximum ½ tsp oil per meal. Use it strategically — cook paneer bhurji with ½ tsp, make sabzi with ½ tsp. No pouring from a bottle. This is where most people's fat loss stalls.</div>
+
+  <div class="div"></div>
+
+  <div class="slbl">Hydration & caffeine</div>
+  <div class="card">
+    <div class="ch teal"><div class="ct">Water intake</div></div>
+    <div class="cb">Currently 1–2L per day. Target: 3L daily by week 3. Keep a 1L bottle on your desk and refill twice throughout the workday. This alone will improve your energy and reduce false hunger.</div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ct">Caffeine</div></div>
+    <div class="cb">You drink 2–3 cups per day. Keep it to black coffee or black tea — no sugar, no milk. Caffeine is fine, but sugary tea cancels out everything else you're doing.</div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="foot">
+  <div class="footn">Jaya Tahiliani</div>
+  Fat Loss · Insulin Resistance Management · Sustainable Nutrition<br>
+  <strong>DRAFT</strong> — Overview & Diet Only · Ahmedabad<br>
+  Female · 45 yrs · 83 kg · 5'2" · Vegetarian · Sedentary (desk job)<br><br>
+  <span style="font-size:10px;color:rgba(255,255,255,0.16)">Next: Workout plan (bodyweight, 3× per week) and Coach Notes will be added after confirmation of this structure.</span>
+</div>
+
+<!-- BOTTOM NAV -->
+<nav class="bnav">
+  <a href="#overview" onclick="hl(this)"><span class="bnav-icon">📊</span>Overview</a>
+  <a href="#diet" onclick="hl(this)"><span class="bnav-icon">🍽</span>Diet</a>
+</nav>
+
+<script>
+function showDiet(type, btn) {
+  document.querySelectorAll('.diet-variant').forEach(d => d.classList.remove('active'));
+  document.querySelectorAll('.day-toggle-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('diet-' + type).classList.add('active');
+  btn.classList.add('active');
+}
+function hl(el) {
+  document.querySelectorAll('.bnav a').forEach(a => a.style.color = '');
+  el.style.color = '#fff';
+  setTimeout(() => { el.style.color = ''; }, 800);
+}
+</script>
+</body>
+</html>
