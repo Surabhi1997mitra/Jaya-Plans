@@ -11,11 +11,11 @@
   --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
   --ink: #1a1a1a; --ink-mid: #444; --ink-soft: #888;
   --paper: #faf8f4; --warm: #f2ede4;
-  --accent: #c0392b; --accent-soft: #fdf0ee;
-  --teal: #1a6b5a; --teal-soft: #e6f4f1;
-  --amber-soft: #fdf4e3; --amber: #c17f24;
+  --accent: #ff8c42; --accent-soft: #ffe8d6;
+  --teal: #1a9b8e; --teal-soft: #d4f1ef;
+  --amber-soft: #fdf4e3; --amber: #ff8c42;
   --border: #e2dcd3;
-  --info: #1d56c4; --info-soft: #eef3fd;
+  --info: #0d7ac2; --info-soft: #e3f0fd;
   --nav: 60px;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -31,7 +31,7 @@ body{font-family:var(--sans);color:var(--ink);font-size:15px;line-height:1.7;pad
 .draft-banner{background:#2c2416;color:#fff;padding:10px 16px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;text-align:center;font-weight:500}
 
 /* COVER */
-#cover{background:var(--ink);color:#fff;padding:48px 20px 44px;position:relative;overflow:hidden}
+#cover{background:#2a2a2a;color:#fff;padding:48px 20px 44px;position:relative;overflow:hidden}
 #cover::before{content:'';position:absolute;top:-60px;right:-60px;width:260px;height:260px;border-radius:50%;border:1px solid rgba(255,255,255,0.05);pointer-events:none}
 #cover::after{content:'';position:absolute;bottom:-40px;left:20%;width:180px;height:180px;border-radius:50%;border:1px solid rgba(255,255,255,0.03);pointer-events:none}
 .cover-eyebrow{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:16px}
@@ -44,9 +44,12 @@ body{font-family:var(--sans);color:var(--ink);font-size:15px;line-height:1.7;pad
 
 /* SECTION STRUCTURE */
 .sec-anchor{display:block}
-.ph{padding:26px 18px 14px;border-bottom:1px solid var(--border);background:var(--paper)}
+.ph{padding:26px 18px 14px;border-bottom:1px solid var(--border);background:var(--paper);display:flex;justify-content:space-between;align-items:flex-start}
+.ph-content{flex:1}
 .ph-eye{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
 .ph-title{font-family:var(--serif);font-size:26px;font-weight:400;line-height:1.15;color:var(--ink)}
+.dl-btn{padding:8px 12px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-size:11px;font-weight:500;cursor:pointer;letter-spacing:0.05em;text-transform:uppercase;transition:background 0.2s;font-family:var(--sans);white-space:nowrap;align-self:flex-start;margin-top:2px}
+.dl-btn:hover{background:#ff7a2f;opacity:0.9}
 .cx{padding:16px 14px}
 
 /* CARDS */
@@ -131,7 +134,7 @@ body{font-family:var(--sans);color:var(--ink);font-size:15px;line-height:1.7;pad
 .stit{font-family:var(--serif);font-size:20px;font-weight:400;line-height:1.2;margin-bottom:11px}
 
 /* FOOTER */
-.foot{background:var(--ink);color:rgba(255,255,255,0.38);padding:22px 16px;font-size:11px;line-height:1.6;margin-top:5px}
+.foot{background:#2a2a2a;color:rgba(255,255,255,0.48);padding:22px 16px;font-size:11px;line-height:1.6;margin-top:5px}
 .footn{font-family:var(--serif);font-size:18px;font-style:italic;color:rgba(255,255,255,0.6);margin-bottom:5px}
 
 @media (max-width: 500px) {
@@ -140,8 +143,6 @@ body{font-family:var(--sans);color:var(--ink);font-size:15px;line-height:1.7;pad
 </style>
 </head>
 <body>
-
-<div class="draft-banner">📋 DRAFT VERSION — Overview & Diet</div>
 
 <!-- COVER -->
 <div id="cover">
@@ -163,8 +164,10 @@ body{font-family:var(--sans);color:var(--ink);font-size:15px;line-height:1.7;pad
 <!-- ═══════════════════ OVERVIEW ═══════════════════ -->
 <div id="overview" class="sec-anchor"></div>
 <div class="ph">
-  <div class="ph-eye">Overview</div>
-  <div class="ph-title">Your numbers<br>and priorities.</div>
+  <div class="ph-content">
+    <div class="ph-eye">Overview</div>
+    <div class="ph-title">Your numbers<br>and priorities.</div>
+  </div>
 </div>
 <div class="cx">
 
@@ -258,8 +261,11 @@ body{font-family:var(--sans);color:var(--ink);font-size:15px;line-height:1.7;pad
 <!-- ═══════════════════ DIET ═══════════════════ -->
 <div id="diet" class="sec-anchor"></div>
 <div class="ph">
-  <div class="ph-eye">Nutrition</div>
-  <div class="ph-title">Your daily meal plan.<br>Home-cooked vegetarian.</div>
+  <div class="ph-content">
+    <div class="ph-eye">Nutrition</div>
+    <div class="ph-title">Your daily meal plan.<br>Home-cooked vegetarian.</div>
+  </div>
+  <button class="dl-btn" onclick="downloadSection('diet')">📥 PDF</button>
 </div>
 <div class="cx">
 
@@ -432,8 +438,11 @@ body{font-family:var(--sans);color:var(--ink);font-size:15px;line-height:1.7;pad
 <!-- ═══════════════════ WORKOUT ═══════════════════ -->
 <div id="workout" class="sec-anchor"></div>
 <div class="ph">
-  <div class="ph-eye">Training</div>
-  <div class="ph-title">Your bodyweight routine.<br>4 sessions per week.</div>
+  <div class="ph-content">
+    <div class="ph-eye">Training</div>
+    <div class="ph-title">Your bodyweight routine.<br>4 sessions per week.</div>
+  </div>
+  <button class="dl-btn" onclick="downloadSection('workout')">📥 PDF</button>
 </div>
 <div class="cx">
 
@@ -696,8 +705,10 @@ body{font-family:var(--sans);color:var(--ink);font-size:15px;line-height:1.7;pad
 <!-- ═══════════════════ SUPPLEMENTS ═══════════════════ -->
 <div id="supplements" class="sec-anchor"></div>
 <div class="ph">
-  <div class="ph-eye">Supplements</div>
-  <div class="ph-title">Support your nutrition.<br>3 key additions.</div>
+  <div class="ph-content">
+    <div class="ph-eye">Supplements</div>
+    <div class="ph-title">Support your nutrition.<br>3 key additions.</div>
+  </div>
 </div>
 <div class="cx">
 
@@ -737,11 +748,59 @@ body{font-family:var(--sans);color:var(--ink);font-size:15px;line-height:1.7;pad
 
 </div>
 
+<!-- ═══════════════════ DOWNLOADS ═══════════════════ -->
+<div id="downloads" class="sec-anchor"></div>
+<div class="ph">
+  <div class="ph-content">
+    <div class="ph-eye">Downloads</div>
+    <div class="ph-title">Save & share your plan.<br>Multiple formats.</div>
+  </div>
+</div>
+<div class="cx">
+
+  <div class="card">
+    <div class="ch teal"><div class="ct">📋 Save This Plan</div></div>
+    <div class="cb">
+      <strong>On Mobile (iOS/Android):</strong><br>
+      Tap the browser menu (⋯ or ⋮) → "Save to Files" or "Print" → "Save as PDF"<br><br>
+      <strong>On Desktop:</strong><br>
+      Ctrl+S (Windows) or Cmd+S (Mac) to save locally, or Print → "Save as PDF"<br><br>
+      Saved plan stays with you forever — reference it anytime.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch info"><div class="ct">💬 Share With Coach</div></div>
+    <div class="cb">
+      Your coach can access this plan anytime at:<br>
+      · WhatsApp link (if shared)<br>
+      · Direct URL (if bookmarked)<br>
+      · Email this page to yourself<br><br>
+      Use this as your reference during check-ins.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ct">🖨️ Print-Friendly</div></div>
+    <div class="cb">
+      Print each tab separately for a binder:<br>
+      · Overview (goals + macros)<br>
+      · Diet (meal plan)<br>
+      · Workout (exercise descriptions)<br>
+      · Supplements (daily additions)<br><br>
+      Use "Print" → "Landscape" for better spacing.
+    </div>
+  </div>
+
+</div>
+
 <!-- ═══════════════════ COACH NOTES (INTERNAL ONLY) ═══════════════════ -->
 <div id="notes" class="sec-anchor"></div>
 <div class="ph">
-  <div class="ph-eye">For Coach Only</div>
-  <div class="ph-title">Internal notes & tracking.<br>Not shared with client.</div>
+  <div class="ph-content">
+    <div class="ph-eye">For Coach Only</div>
+    <div class="ph-title">Internal notes & tracking.<br>Not shared with client.</div>
+  </div>
 </div>
 <div class="cx">
 
@@ -827,9 +886,9 @@ body{font-family:var(--sans);color:var(--ink);font-size:15px;line-height:1.7;pad
 <div class="foot">
   <div class="footn">Jaya Tahiliani</div>
   Fat Loss · Insulin Resistance Management · Bone & Joint Strength<br>
-  <strong>DRAFT</strong> — Overview · Diet · Workout · Supplements · Internal Notes · Ahmedabad<br>
+  Complete Plan — Overview · Diet · Workout · Supplements · Downloads · Internal Notes · Ahmedabad<br>
   Female · 45 yrs · 83 kg · 5'2" · Vegetarian · Post-bariatric surgery · Swims 5–6 days/week<br><br>
-  <span style="font-size:10px;color:rgba(255,255,255,0.16)">Complete plan: Nutrition, bodyweight training (4×/week), and supplements. Coach Notes tab for internal tracking only.</span>
+  <span style="font-size:10px;color:rgba(0,0,0,0.3)">Customized nutrition, 4× weekly bodyweight training, and coaching strategy for sustainable fat loss + insulin resistance management.</span>
 </div>
 
 <!-- BOTTOM NAV -->
@@ -852,6 +911,28 @@ function hl(el) {
   document.querySelectorAll('.bnav a').forEach(a => a.style.color = '');
   el.style.color = '#fff';
   setTimeout(() => { el.style.color = ''; }, 800);
+}
+function downloadSection(section) {
+  const sectionMap = {
+    'diet': { title: 'Jaya — Diet Plan', id: 'diet' },
+    'workout': { title: 'Jaya — Workout Plan', id: 'workout' }
+  };
+  const sectionData = sectionMap[section];
+  if (!sectionData) return;
+  
+  const element = document.getElementById(sectionData.id);
+  const style = '<style>body{font-family:sans-serif;color:#333;line-height:1.6;padding:20px}h1,h2,h3{margin-top:20px}.ph{page-break-inside:avoid}@media print{body{padding:0}}</style>';
+  const printContent = style + element.parentElement.innerHTML;
+  
+  const printWindow = window.open('', '', 'height=600,width=800');
+  printWindow.document.write('<!DOCTYPE html><html><head><title>' + sectionData.title + '</title>' + style + '</head><body>');
+  printWindow.document.write(printContent);
+  printWindow.document.write('</body></html>');
+  printWindow.document.close();
+  
+  setTimeout(() => {
+    printWindow.print();
+  }, 250);
 }
 </script>
 </body>
